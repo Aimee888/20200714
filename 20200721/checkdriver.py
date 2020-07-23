@@ -15,4 +15,3 @@ if __name__ == '__main__':
                     print("Driver is ERROR")
     if not driver_bluetooth_exist:
         print("Not found bluetooth driver")
-

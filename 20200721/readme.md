@@ -2,7 +2,18 @@
 使用python编写  
 参考链接：  
 https://mlog.club/article/2968364  
-https://superuser.com/tags/powershell/info
+https://superuser.com/tags/powershell/info  
+https://jingyan.baidu.com/article/36d6ed1f6e18b61bcf4883de.html
+## BT_test.py
+整合了BT_on.py，BT_off.py，checkdriver.py，bluetooth_test.py  
+功能：
+* 打开蓝牙 -- bt_on()
+* 关闭蓝牙 -- bt_off()
+* 检查蓝牙driver -- bt_check_driver()
+* 扫描附近蓝牙 -- bt_scan_nearby_device() 
+* 检测特定蓝牙是否存在 -- check_certain_device_by_name(device_name) 
+
+将这些功能集中在一个py文件中，变成一个测试蓝牙的工具。
 ### 打开蓝牙 -- BT_on.py
 以管理员程序运行py文件
 Bluetooth.ps1
@@ -29,13 +40,28 @@ Await ($bluetooth.SetStateAsync($BluetoothStatus)) ([Windows.Devices.Radios.Radi
 
 
 ~~~
+remotesigned：  
+可以运行脚本，但要求从网络上下载的脚本和配置文件由可信发布者签名；  
+不要求对已经运行和已在本地计算机编写的脚本进行数字签名。  
+Restricted:  
+禁止运行任何脚本和配置文件。  
+AllSigned:  
+可以运行脚本，但要求所有脚本和配置文件由可信发布者签名，包括在本地计算机上编写的脚本。  
+Unrestricted:  
+可以运行未签名脚本。（危险！）
 ~~~
-powershell.exe -command .\Bluetooth.ps1 -BluetoothStatus On
+Powershell.exe -executionpolicy remotesigned -command .\Bluetooth.ps1  -BluetoothStatus On
+# Powershell.exe -executionpolicy Restricted -command .\Bluetooth.ps1  -BluetoothStatus On
+# Powershell.exe -executionpolicy AllSigned -command .\Bluetooth.ps1  -BluetoothStatus On
+# Powershell.exe -executionpolicy Unrestricted -command .\Bluetooth.ps1  -BluetoothStatus On
 ~~~
 ### 关闭蓝牙 -- BT_off.py
 以管理员程序运行py文件
 ~~~
-powershell.exe -command .\Bluetooth.ps1 -BluetoothStatus Off
+cmd_off = "Powershell.exe -executionpolicy remotesigned -command .\Bluetooth.ps1  -BluetoothStatus Off"
+# cmd_off = "Powershell.exe -executionpolicy Restricted -command .\Bluetooth.ps1  -BluetoothStatus Off"
+# cmd_off = "Powershell.exe -executionpolicy AllSigned -command .\Bluetooth.ps1  -BluetoothStatus Off"
+# cmd_off = "Powershell.exe -executionpolicy Unrestricted -command .\Bluetooth.ps1  -BluetoothStatus Off"
 ~~~
 ### 检查蓝牙driver -- checkdriver.py
 使用wmi检查蓝牙driver
