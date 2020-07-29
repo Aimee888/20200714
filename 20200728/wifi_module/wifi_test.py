@@ -45,6 +45,7 @@ class WifiFunc:
         else:
             wf_status = False
             print("wifi status is off")
+        f.close()
         return wf_status
 
     def wf_check_driver(self, wlan_driver_name):

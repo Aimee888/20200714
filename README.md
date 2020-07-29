@@ -25,3 +25,7 @@ wifi学习
 * 检查wifi driver
 * 扫描附近wifi
 * 检查特定wifi的信号强度
+
+music下载:  
+* 网易云下载
+* 酷我下载
